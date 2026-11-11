@@ -1,0 +1,842 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pakila. | OFFICIAL</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+  --pink: #ff70c8;
+  --purple: #8c68ff;
+  --blue: #65c9ff;
+  --white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family: 'Outfit', sans-serif;
+  color: white;
+  overflow-x: hidden;
+  background: #17112c;
+}
+
+/* BACKGROUND */
+
+.background {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    #6744d9,
+    #bd54ba,
+    #ef83ad,
+    #5c9ee9
+  );
+  background-size: 300% 300%;
+  animation: gradientMove 12s ease infinite;
+}
+
+@keyframes gradientMove {
+  0%,100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(3px);
+  opacity: .35;
+  animation: orbFloat 9s ease-in-out infinite;
+}
+
+.orb.one {
+  width: 250px;
+  height: 250px;
+  background: #ffb7e7;
+  top: 10%;
+  left: -100px;
+}
+
+.orb.two {
+  width: 300px;
+  height: 300px;
+  background: #71d5ff;
+  right: -140px;
+  bottom: 5%;
+  animation-delay: -4s;
+}
+
+.orb.three {
+  width: 150px;
+  height: 150px;
+  background: #ffe5a6;
+  right: 15%;
+  top: 35%;
+  animation-delay: -2s;
+}
+
+@keyframes orbFloat {
+  0%,100% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(25px,-35px) scale(1.12); }
+}
+
+.particle {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: white;
+  opacity: .65;
+  pointer-events: none;
+  animation: particleUp 8s linear infinite;
+}
+
+@keyframes particleUp {
+  from { transform: translateY(100vh); opacity: 0; }
+  20% { opacity: .7; }
+  80% { opacity: .5; }
+  to { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* HEADER */
+
+header {
+  padding: 25px 22px;
+  animation: headerIn .8s ease both;
+}
+
+@keyframes headerIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.logo-icon {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 17px;
+  color: #d94caa;
+  background: linear-gradient(145deg, white, #ffe1f4);
+  font-size: 31px;
+  font-weight: 900;
+  box-shadow: 0 8px 30px #542c9c65;
+  animation: logoFloat 3s ease-in-out infinite;
+  transition: .3s;
+}
+
+.logo-icon:hover {
+  transform: rotate(12deg) scale(1.1);
+}
+
+@keyframes logoFloat {
+  0%,100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-6px) rotate(3deg); }
+}
+
+.logo-name {
+  font-size: 29px;
+  font-weight: 900;
+  letter-spacing: -1px;
+}
+
+.logo-sub {
+  font-size: 9px;
+  letter-spacing: 3px;
+  opacity: .85;
+}
+
+/* MAIN */
+
+main {
+  width: min(490px, calc(100% - 32px));
+  margin: 28px auto 50px;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 28px;
+  animation: heroIn 1s .1s both;
+}
+
+@keyframes heroIn {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 15px;
+  border: 1px solid #ffffff85;
+  border-radius: 30px;
+  background: #ffffff24;
+  backdrop-filter: blur(10px);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 17px;
+}
+
+.hero-label::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  background: #a5ffcf;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #a5ffcf;
+  animation: blink 1.5s infinite;
+}
+
+.hero h1 {
+  font-size: clamp(32px, 9vw, 45px);
+  line-height: 1.05;
+  font-weight: 900;
+  letter-spacing: -1px;
+  text-shadow: 0 5px 25px #432c7a45;
+}
+
+.hero p {
+  font-size: 13px;
+  margin-top: 15px;
+  opacity: .9;
+}
+
+/* FORM CARD */
+
+.card {
+  position: relative;
+  padding: 27px 22px;
+  border: 1px solid #ffffffa0;
+  border-radius: 27px;
+  background: #ffffff25;
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  box-shadow: 0 22px 65px #34245b40;
+  overflow: hidden;
+  animation: cardIn .9s .3s both;
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(35px) scale(.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 70%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, white, transparent);
+  animation: shine 5s ease-in-out infinite;
+}
+
+@keyframes shine {
+  0%, 60% { left: -100%; }
+  100% { left: 130%; }
+}
+
+.card-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.card-icon {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  background: #ffffff30;
+  font-size: 20px;
+}
+
+.card h2 {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.description {
+  font-size: 12px;
+  opacity: .8;
+  margin-bottom: 24px;
+}
+
+label {
+  display: block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  margin: 18px 0 9px;
+}
+
+.input-wrap {
+  position: relative;
+}
+
+input, textarea {
+  display: block;
+  width: 100%;
+  padding: 15px 16px;
+  border: 1px solid #ffffff85;
+  border-radius: 15px;
+  outline: none;
+  color: white;
+  background: #ffffff1b;
+  font-family: inherit;
+  font-size: 14px;
+  transition: .3s ease;
+  pointer-events: auto;
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #ffffffa8;
+}
+
+input:focus, textarea:focus {
+  border-color: white;
+  background: #ffffff35;
+  box-shadow: 0 0 0 4px #ffffff20, 0 0 25px #ffffff35;
+  transform: translateY(-2px);
+}
+
+textarea {
+  min-height: 125px;
+  resize: vertical;
+}
+
+.counter-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 9px;
+  font-size: 10px;
+  opacity: .85;
+}
+
+.counter {
+  font-variant-numeric: tabular-nums;
+}
+
+/* BUTTON */
+
+.send {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  padding: 17px;
+  margin-top: 23px;
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  color: #bd4b9d;
+  background: linear-gradient(100deg, #fff, #ffe0f4);
+  box-shadow: 0 9px 25px #54378c45;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: transform .25s, box-shadow .25s;
+}
+
+.send::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(100deg, #ffe0f4, white, #ffe0f4);
+  transform: translateX(-100%);
+  transition: transform .5s;
+}
+
+.send:hover::before {
+  transform: translateX(0);
+}
+
+.send:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 35px #ffffff55;
+}
+
+.send:active {
+  transform: scale(.97);
+}
+
+.send span {
+  display: inline-block;
+  transition: transform .3s;
+}
+
+.send:hover span {
+  transform: translateX(5px);
+}
+
+.footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 10px;
+  letter-spacing: 3px;
+  opacity: .75;
+}
+
+/* TERMINAL */
+
+#terminal {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+  background: #020602;
+  color: #54ff70;
+  font-family: "Courier New", monospace;
+  overflow: hidden;
+}
+
+#terminal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    transparent 0px,
+    transparent 3px,
+    #1aff3710 4px
+  );
+}
+
+.terminal-frame {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 650px;
+}
+
+.terminal-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding-bottom: 18px;
+  border-bottom: 2px solid #267d37;
+  font-size: clamp(12px, 3vw, 19px);
+  letter-spacing: 2px;
+}
+
+.live {
+  animation: blink 1s infinite;
+}
+
+.stage {
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 25px 0;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .18s ease, transform .18s ease;
+}
+
+.stage.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stage-title {
+  font-size: clamp(18px, 5vw, 28px);
+  line-height: 1.6;
+  text-shadow: 0 0 14px #42ff65;
+  overflow-wrap: anywhere;
+}
+
+.stage-sub {
+  font-size: clamp(13px, 3.5vw, 18px);
+  margin-top: 22px;
+  color: #36bd54;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.cursor {
+  display: inline-block;
+  width: 12px;
+  height: 25px;
+  background: #7aff91;
+  vertical-align: middle;
+  margin-right: 12px;
+  box-shadow: 0 0 15px #4cff69;
+  animation: blink .7s infinite;
+}
+
+.location-box {
+  width: 100%;
+  border: 2px solid #4aff67;
+  padding: 20px;
+  box-shadow: 0 0 25px #1eff3925;
+}
+
+.location-heading {
+  font-size: clamp(20px, 6vw, 32px);
+  font-weight: bold;
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+  text-shadow: 0 0 18px #4aff67;
+}
+
+.location-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 11px 0;
+  border-bottom: 1px solid #1c6330;
+  font-size: clamp(12px, 3vw, 16px);
+}
+
+.location-row span {
+  color: #39b952;
+}
+
+.location-row strong {
+  text-align: right;
+  color: #8aff9c;
+}
+
+.progress-area {
+  border-top: 1px solid #267d37;
+  padding-top: 17px;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.progress-bar {
+  height: 5px;
+  background: #173a1d;
+  margin-top: 12px;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: #4cff69;
+  box-shadow: 0 0 12px #4cff69;
+  transition: width .3s;
+}
+
+@keyframes blink {
+  50% { opacity: .15; }
+}
+
+@media (max-width: 380px) {
+  .card { padding: 23px 18px; }
+  .stage { min-height: 260px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background">
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+  <div class="orb three"></div>
+</div>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">P</div>
+    <div>
+      <div class="logo-name">Pakila.</div>
+      <div class="logo-sub">パキラ OFFICIAL</div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="hero-label">WELCOME TO PAKILA</div>
+    <h1>YOUR MESSAGE<br>MATTERS.</h1>
+    <p>あなたのメッセージを届けよう。</p>
+  </section>
+
+  <section class="card">
+
+    <div class="card-heading">
+      <div class="card-icon">✉</div>
+      <h2>メッセージを書く</h2>
+    </div>
+
+    <p class="description">
+      りゅうとにメッセージを送ってみよう。
+    </p>
+
+    <form id="messageForm">
+
+      <label for="name">YOUR NAME</label>
+      <div class="input-wrap">
+        <input
+          id="name"
+          type="text"
+          maxlength="30"
+          placeholder="名前を入力..."
+          autocomplete="off"
+          required
+        >
+      </div>
+
+      <label for="message">YOUR MESSAGE</label>
+      <textarea
+        id="message"
+        maxlength="200"
+        placeholder="メッセージを入力..."
+        required
+      ></textarea>
+
+      <div class="counter-area">
+        <span>最大200文字</span>
+        <span class="counter">
+          <span id="count">0</span> / 200
+        </span>
+      </div>
+
+      <button class="send" type="submit">
+        <span>SEND MESSAGE　→</span>
+      </button>
+
+    </form>
+  </section>
+
+</main>
+
+<div class="footer">
+  PAKILA OFFICIAL © 2026
+</div>
+
+<!-- TERMINAL -->
+
+<div id="terminal">
+
+  <div class="terminal-frame">
+
+    <div class="terminal-header">
+      <span>PAKILA TERMINAL v1.0</span>
+      <span class="live">● LIVE</span>
+    </div>
+
+    <div class="stage" id="stage">
+      <div id="stageContent"></div>
+    </div>
+
+    <div class="progress-area">
+      <div id="status">INITIALIZING...</div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress"></div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+/* PARTICLES */
+
+for (let i = 0; i < 20; i++) {
+  const particle = document.createElement("div");
+  particle.className = "particle";
+  particle.style.left = Math.random() * 100 + "%";
+  particle.style.animationDelay = Math.random() * 8 + "s";
+  particle.style.animationDuration = 6 + Math.random() * 7 + "s";
+  document.body.appendChild(particle);
+}
+
+/* CHARACTER COUNTER */
+
+const message = document.getElementById("message");
+const count = document.getElementById("count");
+
+message.addEventListener("input", () => {
+  count.textContent = message.value.length;
+});
+
+/* TERMINAL */
+
+const sleep = ms =>
+  new Promise(resolve => setTimeout(resolve, ms));
+
+const scenes = [
+  {
+    title: "SYSTEM INITIALIZING...",
+    sub: "",
+    status: "INITIALIZING SYSTEM...",
+    progress: 10
+  },
+  {
+    title: "> CONNECTION ESTABLISHED",
+    sub: "SECURE CONNECTION : OK",
+    status: "CONNECTING...",
+    progress: 25
+  },
+  {
+    title: "> ACCESSING MAIN SYSTEM...",
+    sub: "AUTHENTICATION : COMPLETE",
+    status: "ACCESSING MAIN SYSTEM...",
+    progress: 40
+  },
+  {
+    title: "> ANALYZING DATA...",
+    sub: "DATABASE RESPONSE : RECEIVED",
+    status: "ANALYZING DATA...",
+    progress: 58
+  },
+  {
+    title: "> LOCATION TRACE : STARTED",
+    sub: "SEARCHING LOCATION DATA...",
+    status: "LOCATION TRACE...",
+    progress: 76
+  }
+];
+
+async function showScene(scene) {
+  const stage = document.getElementById("stage");
+  const content = document.getElementById("stageContent");
+
+  stage.classList.remove("show");
+  await sleep(150);
+
+  content.innerHTML = `
+    <div class="stage-title">
+      <span class="cursor"></span>${scene.title}
+    </div>
+    ${scene.sub
+      ? `<div class="stage-sub">${scene.sub}</div>`
+      : ""}
+  `;
+
+  document.getElementById("status").textContent =
+    scene.status;
+
+  document.getElementById("progress").style.width =
+    scene.progress + "%";
+
+  stage.classList.add("show");
+
+  await sleep(700);
+}
+
+/* FORM SUBMIT */
+
+document.getElementById("messageForm")
+.addEventListener("submit", async event => {
+
+  event.preventDefault();
+
+  const name = document.getElementById("name").value.trim();
+  const text = message.value.trim();
+
+  if (!name || !text) return;
+
+  document.activeElement.blur();
+
+  const terminal = document.getElementById("terminal");
+  terminal.style.display = "flex";
+
+  for (const scene of scenes) {
+    await showScene(scene);
+  }
+
+  /* LOCATION RESULT */
+
+  const stage = document.getElementById("stage");
+  const content = document.getElementById("stageContent");
+
+  stage.classList.remove("show");
+  await sleep(150);
+
+  content.innerHTML = `
+    <div class="location-box">
+
+      <div class="location-heading">
+        住所特定
+      </div>
+
+      <div class="location-row">
+        <span>COUNTRY</span>
+        <strong>日本</strong>
+      </div>
+
+      <div class="location-row">
+        <span>PREFECTURE</span>
+        <strong>静岡県</strong>
+      </div>
+
+      <div class="location-row">
+        <span>CITY</span>
+        <strong>島田市</strong>
+      </div>
+
+      <div class="location-row">
+        <span>AREA</span>
+        <strong>金谷</strong>
+      </div>
+
+      <div class="location-row">
+        <span>SCHOOL</span>
+        <strong>非公開</strong>
+      </div>
+
+    </div>
+
+    <div class="stage-sub">
+      > LOCATION IDENTIFICATION : COMPLETE
+    </div>
+  `;
+
+  document.getElementById("status").textContent =
+    "LOCATION DATA : COMPLETE";
+
+  document.getElementById("progress").style.width =
+    "100%";
+
+  stage.classList.add("show");
+
+});
+</script>
+
+</body>
+</html>
